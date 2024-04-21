@@ -1,4 +1,4 @@
-import {
+  import {
     ChevronLeft,
     ChevronRight,
     Copy,
@@ -30,8 +30,37 @@ import {
   } from "@/components/ui/pagination"
   import { Separator } from "@/components/ui/separator"
   import Notification from "@/components/Notification"
+  import { supabase } from "@/utils/supabase"
+  import { useState, useEffect } from "react"
+
+
+  
+
+  
   
   export default function Component() {
+  const [notifications, setNotifications] = useState([]);
+
+  const fetchNotifications = async () => {
+    const { data, error } = await supabase
+      .from("notifications")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error("Error fetching notifications:", error);
+      return;
+    }
+    console.log(data)
+    setNotifications(data);
+  };
+
+  useEffect(() => {
+    fetchNotifications();
+  }, []);
+
+
+
     return (
     <div className="w-full max-w-md">
         <Card className="overflow-hidden ">
@@ -43,9 +72,9 @@ import {
           </div>
         </CardHeader>
         <CardContent className="py-0 text-sm *:mb-2">
-            <Notification /> 
-            <Notification />        
-            <Notification />        
+            {notifications.map((notification) => (
+                <Notification key={notification.id} notification={notification} />
+            ))}       
 
         </CardContent>
       </Card>
