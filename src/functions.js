@@ -1,4 +1,23 @@
 import { supabase } from "./utils/supabase";
+import { Resend } from 'resend';
+
+const resend = new Resend('re_F1zG1Cre_AvGjLLHomM6P4puVpS5MvEqP');
+
+async function sendEmail(email, subject, text) {
+  const { data, error } = await resend.emails.send({
+    from: 'Heisenburgers <hello@bestphysicsproject.com>',
+    to: email,
+    subject: subject,
+    html: `<p>${text}</p>`,
+  });
+
+  if (error) {
+    console.error({ error });
+    return;
+  }
+
+  console.log({ data });
+}
 
 export async function addPersonToTable(name, email, role, security_method, passphrase) {
   const { data, error } = await supabase
@@ -11,6 +30,8 @@ export async function addPersonToTable(name, email, role, security_method, passp
     console.error('Error adding person:', error);
     return null;
   }
+
+  sendEmail(email, 'Welcome to Heisenburgers!', `You have been added to the Heisenburgers residence as a ${role}.`);
   return data;
 }
 

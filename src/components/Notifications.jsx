@@ -41,6 +41,19 @@
   export default function Component() {
   const [notifications, setNotifications] = useState([]);
 
+  const changes = supabase
+  .channel('table-db-changes')
+  .on(
+    'postgres_changes',
+    {
+      event: 'INSERT',
+      schema: 'public',
+      table: 'notifications',
+    },
+    (payload) => setNotifications([payload.new, ...notifications])
+  )
+  .subscribe()
+
   const fetchNotifications = async () => {
     const { data, error } = await supabase
       .from("notifications")
