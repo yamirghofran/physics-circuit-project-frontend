@@ -129,7 +129,8 @@ export default function PeopleTable() {
       name: "John Deez",
       email: "john.deez@gmail.com",
       role: "Guest",
-      security_method: "Passphrase",
+      security_method: "passcode",
+      passcode: 1234,
     },
   }) {
 
@@ -137,12 +138,12 @@ export default function PeopleTable() {
     const [personEmail, setPersonEmail] = useState(person.email);
     const [personRole, setPersonRole] = useState(person.role);
     const [personSecurityMethod, setPersonSecurityMethod] = useState(person.security_method);
-    const [personPassphrase, setPersonPassphrase] = useState(person.passphrase);
+    const [personPasscode, setPersonPasscode] = useState(person.passcode);
 
     function handleUpdatePerson(id) {
-      const controlledPassphrase = personPassphrase!="" ? personPassphrase : null;
+      const controlledPasscode = personPasscode!="" ? personPasscode : null;
       if (personName && personEmail && personRole && personSecurityMethod) {
-        updatePersonInTable(id, personName, personEmail, personRole, personSecurityMethod, controlledPassphrase)
+        updatePersonInTable(id, personName, personEmail, personRole, personSecurityMethod, controlledPasscode)
           .then((data) => {
               console.log('Person updated successfully:', data);
               // Optionally, you can clear the form fields here or fetch the updated list of people
@@ -150,7 +151,7 @@ export default function PeopleTable() {
               setPersonEmail('');
               setPersonRole('');
               setPersonSecurityMethod('');
-              setPersonPassphrase('');
+              setPersonPasscode();
               // Fetch updated list of people to reflect the newly added person
               fetchPeople();
 
@@ -248,24 +249,24 @@ export default function PeopleTable() {
                         <SelectContent>
                           <SelectGroup>
                             <SelectLabel>Security Method</SelectLabel>
-                            <SelectItem value="passphrase">Passphrase</SelectItem>
+                            <SelectItem value="passcode">Passcode</SelectItem>
                             <SelectItem value="one-time">
-                              One-Time Passphrase
+                              One-Time Code
                             </SelectItem>
                           </SelectGroup>
                         </SelectContent>
                       </Select>
                     </div>
-                    {personSecurityMethod==='passphrase' &&
+                    {personSecurityMethod==='passcode' &&
                     <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="passphrase" className="text-right">
-                        Passphrase
+                    <Label htmlFor="passcode" className="text-right">
+                        Passcode
                       </Label>
                       <Input
-                        id="passphrase"
-                        value={personPassphrase}
-                        onChange={(e) => setPersonPassphrase(e.target.value)}
-                        placeholder="I like them big"
+                        id="passcode"
+                        value={personPasscode}
+                        onChange={(e) => setPersonPasscode(e.target.value)}
+                        placeholder="1234"
                         className="col-span-3"
                       />
                   </div>}
@@ -285,12 +286,12 @@ export default function PeopleTable() {
     const [email, setEmail] = useState("");
     const [role, setRole] = useState("");
     const [securityMethod, setSecurityMethod] = useState("");
-    const [passphrase, setPassphrase] = useState("");
+    const [passcode, setPasscode] = useState();
   
     function handleAddPerson() {
-      const controlledPassphrase = passphrase!="" ? passphrase : null;
+      const controlledPasscode = passcode!="" ? passcode : null;
       if (name && email && role && securityMethod) {
-        addPersonToTable(name, email, role, securityMethod, controlledPassphrase)
+        addPersonToTable(name, email, role, securityMethod, controlledPasscode)
           .then((data) => {
               console.log('Person added successfully:', data);
               /* setPeople(prevPeople => [...prevPeople, {name, email, role, security_method: securityMethod, passphrase: controlledPassphrase}]); */
@@ -299,7 +300,7 @@ export default function PeopleTable() {
               setEmail('');
               setRole('');
               setSecurityMethod('');
-              setPassphrase('');
+              setPasscode();
               // Fetch updated list of people to reflect the newly added person
               fetchPeople();
 
@@ -381,24 +382,24 @@ export default function PeopleTable() {
                         <SelectContent>
                           <SelectGroup>
                             <SelectLabel>Security Method</SelectLabel>
-                            <SelectItem value="passphrase">Passphrase</SelectItem>
+                            <SelectItem value="passcode">Passcode</SelectItem>
                             <SelectItem value="one-time">
-                              One-Time Passphrase
+                              One-Time Code
                             </SelectItem>
                           </SelectGroup>
                         </SelectContent>
                       </Select>
                     </div>
-                    {securityMethod==='passphrase' &&
+                    {securityMethod==='passcode' &&
                     <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="passphrase" className="text-right">
-                        Passphrase
+                    <Label htmlFor="passcode" className="text-right">
+                        Passcode
                       </Label>
                       <Input
-                        id="passphrase"
-                        value={passphrase}
-                        onChange={(e) => setPassphrase(e.target.value)}
-                        placeholder="I like them big"
+                        id="passcode"
+                        value={passcode}
+                        onChange={(e) => setPasscode(e.target.value)}
+                        placeholder="1234"
                         className="col-span-3"
                       />
                   </div>}
@@ -417,12 +418,12 @@ export default function PeopleTable() {
     const [email, setEmail] = useState(person.email);
     const [role, setRole] = useState(person.role);
     const [securityMethod, setSecurityMethod] = useState(person.security_method);
-    const [passphrase, setPassphrase] = useState(person.passphrase);
+    const [passcode, setPasscode] = useState(person.passcode);
   
     function handleUpdatePerson(id) {
-      const controlledPassphrase = passphrase!="" ? passphrase : null;
+      const controlledPasscode = passcode!="" ? passcode : null;
       if (name && email && role && securityMethod) {
-        updatePersonInTable(id, name, email, role, securityMethod, controlledPassphrase)
+        updatePersonInTable(id, name, email, role, securityMethod, controlledPasscode)
           .then((data) => {
               console.log('Person updated successfully:', data);
               /* setPeople(prevPeople => [...prevPeople, {name, email, role, security_method: securityMethod, passphrase: controlledPassphrase}]); */
@@ -431,7 +432,7 @@ export default function PeopleTable() {
               setEmail('');
               setRole('');
               setSecurityMethod('');
-              setPassphrase('');
+              setPasscode();
               // Fetch updated list of people to reflect the newly added person
               fetchPeople();
 
@@ -513,24 +514,24 @@ export default function PeopleTable() {
                         <SelectContent>
                           <SelectGroup>
                             <SelectLabel>Security Method</SelectLabel>
-                            <SelectItem value="passphrase">Passphrase</SelectItem>
+                            <SelectItem value="passcode">Passcode</SelectItem>
                             <SelectItem value="one-time">
-                              One-Time Passphrase
+                              One-Time Code
                             </SelectItem>
                           </SelectGroup>
                         </SelectContent>
                       </Select>
                     </div>
-                    {securityMethod==='passphrase' &&
+                    {securityMethod==='passcode' &&
                     <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="passphrase" className="text-right">
-                        Passphrase
+                    <Label htmlFor="passcode" className="text-right">
+                        Passcode
                       </Label>
                       <Input
-                        id="passphrase"
-                        value={passphrase}
-                        onChange={(e) => setPassphrase(e.target.value)}
-                        placeholder="I like them big"
+                        id="passcode"
+                        value={passcode}
+                        onChange={(e) => setPasscode(e.target.value)}
+                        placeholder="1234"
                         className="col-span-3"
                       />
                   </div>}

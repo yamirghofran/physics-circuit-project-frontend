@@ -58,6 +58,7 @@
     const { data, error } = await supabase
       .from("notifications")
       .select("*")
+      .limit(6)
       .order("created_at", { ascending: false });
 
     if (error) {

@@ -19,11 +19,11 @@ async function sendEmail(email, subject, text) {
   console.log({ data });
 }
 
-export async function addPersonToTable(name, email, role, security_method, passphrase) {
+export async function addPersonToTable(name, email, role, security_method, passcode) {
   const { data, error } = await supabase
     .from('people')
     .insert([
-      { name, email, role, security_method, passphrase }
+      { name, email, role, security_method, passcode }
     ]);
 
   if (error) {
@@ -48,10 +48,10 @@ export async function deletePersonFromTable(id) {
   return data;
 }
 
-export async function updatePersonInTable(id, name, email, role, security_method) {
+export async function updatePersonInTable(id, name, email, role, security_method, passcode) {
   const { data, error } = await supabase
     .from('people')
-    .update({ name, email, role, security_method })
+    .update({ name, email, role, security_method, passcode })
     .match({ id });
 
   if (error) {
