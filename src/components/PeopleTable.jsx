@@ -188,7 +188,7 @@ export default function PeopleTable() {
               <DialogTrigger asChild>
               <DropdownMenuItem>Edit</DropdownMenuItem>
               </DialogTrigger>
-              <DropdownMenuItem onClick={() => handleDeletePerson(person.id)}>Delete</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => console.log("Requested to delete")}>Delete</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
           <DialogContent className="sm:max-w-[425px]">
@@ -272,7 +272,7 @@ export default function PeopleTable() {
                   </div>}
                   </div>
                   <DialogFooter>
-                    <Button type="submit" onClick={() => handleUpdatePerson(person.id)}>Update Person</Button>
+                    <Button type="submit" onClick={() => console.log("Requested to update")}>Update Person</Button>
                   </DialogFooter>
                 </DialogContent>
           </Dialog>
